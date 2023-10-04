@@ -129,7 +129,7 @@ public class SLL<T> {
      */
     public int size() {
         int size = 0;
-        for (NodeSL<T> item = this.head; item != this.tail.getNext(); item = item.getNext()) {
+        for (NodeSL<T> item = this.head; item != null; item = item.getNext()) {
             size +=1;
         }
         return size;
@@ -168,13 +168,24 @@ public class SLL<T> {
      * @param afterHere  marks the position in this where the new list should go
      */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
+        // create copy of provided list
+        SLL<T> copy = new SLL<T>();
+        // add to head of copy
+        copy.addFirst(list.getHead().getData());
+        // set up a prevAdded
+        NodeSL<T> prevAdded = list.getHead();
+        // loop through list
+        while (prevAdded != null) {
+            copy.addAfter(prevAdded,prevAdded.getNext().getData());
+            prevAdded = prevAdded.getNext();
+        }
+        // if afterHere is null, add list to the head of this
         if (afterHere.equals(null)){
-            // if afterHere is null, add list to the head of this
-            list.tail.setNext(this.head);
-            this.head = list.head;
+            copy.tail.setNext(this.head);
+            this.head = copy.head;
         }
         // connect end of list to the beginning of second part of this
-        list.getTail().setNext(afterHere.getNext());
+        copy.getTail().setNext(afterHere.getNext());
         // connect afterHere to the beginning of the list
         afterHere.setNext(list.getHead());
     }
