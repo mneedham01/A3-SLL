@@ -197,8 +197,18 @@ public class SLL<T> {
      * @return  the new list
      */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
-        SLL<T> list = new SLL<T>();
-        return list;
+        SLL<T> subseq = new SLL<T>();
+        // add first node
+        subseq.addFirst(afterHere.getNext().getData());
+        NodeSL<T> current = afterHere.getNext();
+        // loop through subseq, add to new list
+        while (current != toHere) {
+            subseq.addAfter(current, current.getNext().getData());
+            current = current.getNext();
+        }
+        // rewrite connection afterHere
+        afterHere.setNext(toHere.getNext());
+        return subseq;
     }
 
     /*
