@@ -105,8 +105,14 @@ public class SLL<T> {
         if (v.equals(null)) {
             throw new MissingElementException();
         }
-        NodeSL<T> toAdd = new NodeSL<T>(v, here.getNext());
-        here.setNext(toAdd);
+        if (this.tail == here) {
+            NodeSL<T> toAdd = new NodeSL<T>(v, null);
+            here.setNext(toAdd);
+            this.tail = toAdd;
+        } else {
+            NodeSL<T> toAdd = new NodeSL<T>(v, here.getNext());
+            here.setNext(toAdd);
+        }
     }
 
     /*
@@ -130,15 +136,28 @@ public class SLL<T> {
      *  @return item removed
      */
     public T removeLast() {
-         if (this.tail.equals(null)) {
+        if (this.tail.equals(null)) {
             throw new MissingElementException();
         }
+        // if head and tail are the same (one item in list)
+        if (this.size() == 1) {
+            T itemRemoved = this.tail.getData();
+            this.head = this.tail = null;
+            return itemRemoved;
+        }
+        // if list is longer than one node
+        // save the data in last to return
         T itemRemoved = this.tail.getData();
+        boolean foundNodeBeforeHead = false;
         for (NodeSL<T> item = this.head; item != this.tail; item = item.getNext()) {
-            if (item.getNext().equals(this.tail)){
+            if (item.getNext() == this.tail) {
                 item.setNext(null);
-                this.tail = item;
+                foundNodeBeforeHead = true;
+                break;
             }
+        }
+        if (!foundNodeBeforeHead) {
+            throw new MissingElementException();
         }
         return itemRemoved;
     }
@@ -149,8 +168,20 @@ public class SLL<T> {
      * @return item removed
      */
     public T removeAfter(NodeSL<T> here) {
-        here.setNext(here.getNext().getNext());
-        T toRemove = here.getNext().getData();
+        T toRemove = null;
+        if (here == null) {
+            this.tail = this.head = null;
+            toRemove = this.head.getData();
+        } else {
+            for (NodeSL<T> item = this.head; item != this.tail; item = item.getNext()) {
+                if (item == here) {
+                    toRemove = item.getNext().getData();
+                    NodeSL<T> toConnect = item.getNext().getNext();
+                    item.setNext(toConnect);
+                    break;
+                }
+            }
+        }
         return toRemove;
     }
 
