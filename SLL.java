@@ -168,6 +168,9 @@ public class SLL<T> {
      * @param afterHere  marks the position in this where the new list should go
      */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
+        if (list.equals(this)) {
+            throw new SelfInsertException();
+        }
         // create copy of provided list
         SLL<T> copy = new SLL<T>();
         // add to head of copy
@@ -218,6 +221,9 @@ public class SLL<T> {
      *  @param afterHere  Marks the place where the new elements are inserted
      */
     public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere) {
+        if (list.equals(this)) {
+            throw new SelfInsertException();
+        }
         NodeSL<T> afterSplice = afterHere.getNext();
         afterHere.setNext(list.head);
         list.tail.setNext(afterSplice);

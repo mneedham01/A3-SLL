@@ -60,7 +60,7 @@ For transfer style, you will write `subseqByTransfer` and `spliceByTransfer`.  T
 
 ## Phase Four:  Exceptions
 
-There is no interface for this phase.  Instead of assing new methods, you will add make sure that the existing ones properly handle certain erroneous conditions by throwing an appropriate exception.  We have defined these exception classes for you.  Read their documentation and figure out which of your existing methods should throw them, and under what circumstances.  Note that you can throw an exception like so:
+There is no interface for this phase.  Instead of adding new methods, you will add make sure that the existing ones properly handle certain erroneous conditions by throwing an appropriate exception.  We have defined these exception classes for you.  Read their documentation and figure out which of your existing methods should throw them, and under what circumstances.  Note that you can throw an exception like so:
     `throw new MissingElementException();`
 
 
