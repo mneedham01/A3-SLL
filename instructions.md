@@ -39,7 +39,7 @@ Now that you've gotten a basic list up and running, it's time to add more method
 
 Start with `removeFirst`, then do `addLast` and `removeLast`.  Finally work on `addAfter` and `removeAfter`.  Tackle one at a time, and try to get it passing all the relevant tests before going on to the next one.  **No, really!**  You want to catch any bugs in one method before going on to the next, otherwise you'll never be sure whether a problem is in the new thing you are working on or something earlier.
 
-This would also be a good time to add a `size` method.  It needs to loop through all the elements to count how many there are.  (Alternately, your implementation could add a field to keep track of the total number at any given time as they are added or removed.  This sounds convenient, except that you have to remember always to update it when you perform an operation that changes the length. 
+This would also be a good time to add a `size` method.  It needs to loop through all the elements to count how many there are.  (Alternately, your implementation could add a field to keep track of the total number at any given time as they are added or removed.  This sounds convenient, except that you have to remember always to update it when you perform an operation that changes the length.
  Probably it is easier just to count when necessary.)
 
 While working on this stage, it's pretty easy to accidentally write code that goes into an infinite loop.  If your program seems frozen, **that's a sign**.  While developing, you may want to include a print statement inside every loop so you can easily detect this sort of bug.  Only remove it (or comment out) when you are sure that things are working properly -- but don't forget to do so before you submit your work!  If you do find that your code is looping infinitely, try drawing a picture of what is happening to understand why.
@@ -54,7 +54,7 @@ Next, add `subseqByCopy` and `spliceByCopy`.  Since you are making copies, these
 * `subseqByCopy(here,n)` returns a copy of a subsequence of the list.  The subsequence starts at `here` and contains `n` nodes.  (If the original list is too short to provide the requested number of nodes, throw an exception.)  `this` remains unchanged.
 * `spliceByCopy(list,afterHere)` copies the nodes of `list` and adds them to `this` following the node `afterHere`.  If `afterHere` is null it adds them at the head of `this`.  The contents of `list` remain unchanged.
 
-For transfer style, you will write `subseqByTransfer` and `spliceByTransfer`.  These should transfer nodes as a group from one list to another juat by updating a few links, and will not require looping.
+For transfer style, you will write `subseqByTransfer` and `spliceByTransfer`.  These should transfer nodes as a group from one list to another just by updating a few links, and will not require looping.
 * `subseqByTransfer(afterHere,toHere)` extracts a subsequence out of the original list and returns it as a new list (thus shortening the original list).  The extracted sequence begins with the element following `afterHere` and goes up to and including `toHere`.  The original list should skip from `afterHere` to the element that originally followed `toHere`.  If `afterHere` is `null` it should extract a sequence from the head of the list onwards.
 * `spliceByTransfer(list,afterHere)` moves all the elements of `list` into `this` just after the node `afterHere`.  The input argument `list` should be left empty after the transfer.
 
