@@ -44,6 +44,9 @@ public class SLL<T> {
      * @param v item to insert
      */
     public void addFirst(T v) {
+        if (v.equals(null)) {
+            throw new MissingElementException();
+        }
         if (this.isEmpty()) {
             NodeSL<T> first = new NodeSL<T> (v, null);
             this.head = this.tail = first;
@@ -70,6 +73,9 @@ public class SLL<T> {
      *  @param item to insert
      */
     public void addLast(T v) {
+        if (v.equals(null)) {
+            throw new MissingElementException();
+        }
         NodeSL<T> last = new NodeSL<T>(v, null);
         this.tail.setNext(last);
         this.tail = last;
@@ -81,6 +87,9 @@ public class SLL<T> {
      *  @param v item to insert
      */
     public void addAfter(NodeSL<T> here, T v) {
+        if (v.equals(null)) {
+            throw new MissingElementException();
+        }
         NodeSL<T> toAdd = new NodeSL<T>(v, here.getNext());
         here.setNext(toAdd);
     }
@@ -90,6 +99,9 @@ public class SLL<T> {
      *  @return v item removed
      */
     public T removeFirst(){
+        if (this.head.equals(null)) {
+            throw new MissingElementException();
+        }
         T itemRemoved = this.head.getData();
         NodeSL<T> newHead = this.head.getNext();
         this.head.setNext(null);
@@ -102,6 +114,9 @@ public class SLL<T> {
      *  @return item removed
      */
     public T removeLast() {
+         if (this.tail.equals(null)) {
+            throw new MissingElementException();
+        }
         T itemRemoved = this.tail.getData();
         for (NodeSL<T> item = this.head; item != this.tail; item = item.getNext()) {
             if (item.getNext().equals(this.tail)){
