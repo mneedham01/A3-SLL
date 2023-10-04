@@ -1,5 +1,4 @@
-import org.junit.Test;
-import org.junit.Assert.*;
+import org.junit.*;
 
 /**
  * This class is designed to use with JUnit at the

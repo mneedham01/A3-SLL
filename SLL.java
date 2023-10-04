@@ -16,6 +16,13 @@ public class SLL<T> {
     }
 
     /*
+     * Copy constructor stub
+     */
+    public SLL(SLL<T> original) {
+
+    }
+
+    /*
      * Accessor for head node
      * @return the head node
      */
@@ -60,9 +67,12 @@ public class SLL<T> {
      * Converts to a string representation
      */
     public String toString() {
+        if (this.isEmpty()) {
+            return "[]";
+        }
         String string = "[";
         for (NodeSL<T> item = this.head; item != this.tail; item = item.getNext()) {
-            string += item.getData()+ ",";
+            string += item.getData()+ ", ";
         }
         string += this.tail.getData()+"]";
         return string;
@@ -77,7 +87,12 @@ public class SLL<T> {
             throw new MissingElementException();
         }
         NodeSL<T> last = new NodeSL<T>(v, null);
-        this.tail.setNext(last);
+        // if the current list is empty
+        if (this.isEmpty()) {
+            this.head = last;
+        } else{
+            this.tail.setNext(last);
+        }
         this.tail = last;
     }
 
@@ -99,6 +114,7 @@ public class SLL<T> {
      *  @return v item removed
      */
     public T removeFirst(){
+        // if the list is empty
         if (this.head.equals(null)) {
             throw new MissingElementException();
         }

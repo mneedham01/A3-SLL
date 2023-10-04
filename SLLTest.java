@@ -253,22 +253,22 @@ public class SLLTest {
         }
     }
 
-    // @Test
-    // public void test_copy_constructor() {
-    //     try {
-    //         // System.out.println("[subseqByCopy]");
-    //         SLL<String> list = TestMethods.makeSLL(bac);
-    //         String s = TestMethods.verifySLL(new SLL<String>(list), bac);
-    //         Assert.assertTrue("copy BAC" + s, s.equals(""));
-    //         s = TestMethods.verifySLL(new SLL<String>(new SLL<String>()), empty);
-    //         Assert.assertTrue("copy empty" + s, s.equals(""));
-    //     } catch (Exception e) {
-    //         Assert.fail("Test copy constructor exception:  " + e);
-    //         e.printStackTrace();
-    //     } catch (NoSuchMethodError e) {
-    //         Assert.fail("Test missing method:  " + e);
-    //     }
-    // }
+    @Test
+    public void test_copy_constructor() {
+        try {
+            // System.out.println("[subseqByCopy]");
+            SLL<String> list = TestMethods.makeSLL(bac);
+            String s = TestMethods.verifySLL(new SLL<String>(list), bac);
+            Assert.assertTrue("copy BAC" + s, s.equals(""));
+            s = TestMethods.verifySLL(new SLL<String>(new SLL<String>()), empty);
+            Assert.assertTrue("copy empty" + s, s.equals(""));
+        } catch (Exception e) {
+            Assert.fail("Test copy constructor exception:  " + e);
+            e.printStackTrace();
+        } catch (NoSuchMethodError e) {
+            Assert.fail("Test missing method:  " + e);
+        }
+    }
 
     @Test
     public void test_subseqByCopy() {
