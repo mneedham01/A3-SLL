@@ -1,7 +1,8 @@
 /** Keeps track of position in a linked list */
 public class SLL_Iterator<T> implements Phase5SLL_Iterator<T> {
 
-    SLL<T> list;
+    private SLL<T> list;
+    private NodeSL<T> next;
 
     /**
      * Creates a new iterator on the given list.
@@ -11,6 +12,7 @@ public class SLL_Iterator<T> implements Phase5SLL_Iterator<T> {
      */
     public SLL_Iterator(SLL<T> list) {
         this.list = list;
+        this.next = list.getHead();
     }
 
     /**
@@ -19,8 +21,7 @@ public class SLL_Iterator<T> implements Phase5SLL_Iterator<T> {
      * @return T/F is it safe to call next()?
      */
     public boolean hasNext() {
-        // TODO
-        return false;
+        return this.next.getNext() != null;
     }
 
     /**
@@ -30,8 +31,7 @@ public class SLL_Iterator<T> implements Phase5SLL_Iterator<T> {
      * @return the next element
      */
     public T next() {
-        // TODO
-        return null;
+        return this.next.getData();
     }
 
     /**
@@ -40,7 +40,7 @@ public class SLL_Iterator<T> implements Phase5SLL_Iterator<T> {
      * @param data value to set
      */
     public void set(T data) {
-        // TODO
+
     }
 
     /**

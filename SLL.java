@@ -145,20 +145,13 @@ public class SLL<T> {
             this.head = this.tail = null;
             return itemRemoved;
         }
-        // if list is longer than one node
-        // save the data in last to return
         T itemRemoved = this.tail.getData();
-        boolean foundNodeBeforeHead = false;
+        NodeSL<T> prev =null;
         for (NodeSL<T> item = this.head; item != this.tail; item = item.getNext()) {
-            if (item.getNext() == this.tail) {
-                item.setNext(null);
-                foundNodeBeforeHead = true;
-                break;
-            }
+            prev = item;
         }
-        if (!foundNodeBeforeHead) {
-            throw new MissingElementException();
-        }
+        prev.setNext(null);
+        this.tail = prev;
         return itemRemoved;
     }
 
