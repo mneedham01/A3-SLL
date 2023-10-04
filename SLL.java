@@ -142,6 +142,9 @@ public class SLL<T> {
      * @return the copied list
      */
     public SLL<T> subseqByCopy(NodeSL<T> here, int n){
+        if (this.size() < n) {
+            throw new RuntimeException();
+        }
         // start a new SLL
         SLL<T> subseq = new SLL<T>();
         // add here to the head
@@ -165,7 +168,15 @@ public class SLL<T> {
      * @param afterHere  marks the position in this where the new list should go
      */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
-
+        if (afterHere.equals(null)){
+            // if afterHere is null, add list to the head of this
+            list.tail.setNext(this.head);
+            this.head = list.head;
+        }
+        // connect end of list to the beginning of second part of this
+        list.getTail().setNext(afterHere.getNext());
+        // connect afterHere to the beginning of the list
+        afterHere.setNext(list.getHead());
     }
 
     /*
