@@ -218,7 +218,9 @@ public class SLL<T> {
      *  @param afterHere  Marks the place where the new elements are inserted
      */
     public void spliceByTransfer(SLL<T> list, NodeSL<T> afterHere) {
-
+        NodeSL<T> afterSplice = afterHere.getNext();
+        afterHere.setNext(list.head);
+        list.tail.setNext(afterSplice);
     }
 
 }
