@@ -204,28 +204,17 @@ public class SLL<T> {
      * @return the copied list
      */
     public SLL<T> subseqByCopy(NodeSL<T> here, int n){
-        System.out.println("this = "+this);
         if (this.size() < n) {
             throw new RuntimeException();
         }
         // start a new SLL copying this
         SLL<T> subseq = new SLL<T>(this);
-        System.out.println("subseq= "+subseq);
         // find the item before here to reset to null
         // not necessary if here is the head
-        System.out.println("subseq.getHead().getData()= "+subseq.getHead().getData());
-        System.out.println("here.getData()= "+here.getData());
         if (subseq.getHead().getData() != here.getData()) {
-            System.out.println("subseqHead is NOT the same as here");
             NodeSL<T> current = subseq.head;
-            System.out.println("current = "+current.getData());
-            int i = 0;
             while (current.getNext().getData() != here.getData()) {
-                System.out.println("current.getNext= "+current.getNext().getData());
-                System.out.println("current.getNext() is not HERE. time = "+i);
                 current = current.getNext();
-                System.out.println("current = "+current.getData());
-                i += 1;
             }
             // found node before here
             // set here as head
@@ -253,21 +242,15 @@ public class SLL<T> {
             throw new SelfInsertException();
         }
         // create copy of provided list
-        SLL<T> copy = new SLL<T>();
-        // add to head of copy
-        copy.addFirst(list.getHead().getData());
-        // set up a prevAdded
-        NodeSL<T> prevAdded = list.getHead();
-        // loop through list
-        while (prevAdded != null) {
-            copy.addAfter(prevAdded,prevAdded.getNext().getData());
-            prevAdded = prevAdded.getNext();
-        }
-        // if afterHere is null, add list to the head of this
+        SLL<T> copy = new SLL<T>(list);
+        // if afterHere is null, add copy to the head of this
         if (afterHere.equals(null)){
             copy.tail.setNext(this.head);
             this.head = copy.head;
+        } else {
+            // if afterHere is not null, find afterHere
         }
+
         // connect end of list to the beginning of second part of this
         copy.getTail().setNext(afterHere.getNext());
         // connect afterHere to the beginning of the list
