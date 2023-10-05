@@ -19,21 +19,12 @@ public class SLL<T> {
      * Copy constructor
      */
     public SLL(SLL<T> original) {
-        // start list
+        // start list as empty
         this.head = null;
         this.tail = null;
-        // if original isn't empty
         if (! original.isEmpty()) {
-            // if original is one
-            if (original.size() == 1) {
-                this.head = this.tail = original.getHead();
-            } else {
-                this.head = original.getHead();
-                for (NodeSL<T> item = original.getHead(); item != original.tail; item = item.getNext()) {
-                    this.addAfter(item, item.getNext().getData());
-                }
-                this.tail = original.getTail();
-                this.tail.setNext(null);
+            for (NodeSL<T> item = original.getHead(); item != original.tail.getNext(); item = item.getNext()){
+                this.addLast(item.getData());
             }
         }
     }
@@ -226,7 +217,7 @@ public class SLL<T> {
         int counter = 1;
         while (counter < n) {
             NodeSL<T> current = prevAdded.getNext();
-            addAfter(prevAdded, current.getData());
+            subseq.addAfter(prevAdded, current.getData());
             prevAdded = current;
             counter += 1;
         }
