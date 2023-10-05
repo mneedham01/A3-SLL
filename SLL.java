@@ -16,10 +16,26 @@ public class SLL<T> {
     }
 
     /*
-     * Copy constructor stub
+     * Copy constructor
      */
     public SLL(SLL<T> original) {
-
+        // start list
+        this.head = null;
+        this.tail = null;
+        // if original isn't empty
+        if (! original.isEmpty()) {
+            // if original is one
+            if (original.size() == 1) {
+                this.head = this.tail = original.getHead();
+            } else {
+                this.head = original.getHead();
+                for (NodeSL<T> item = original.getHead(); item != original.tail; item = item.getNext()) {
+                    this.addAfter(item, item.getNext().getData());
+                }
+                this.tail = original.getTail();
+                this.tail.setNext(null);
+            }
+        }
     }
 
     /*
