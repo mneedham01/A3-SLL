@@ -204,17 +204,28 @@ public class SLL<T> {
      * @return the copied list
      */
     public SLL<T> subseqByCopy(NodeSL<T> here, int n){
+        System.out.println("this = "+this);
         if (this.size() < n) {
             throw new RuntimeException();
         }
         // start a new SLL copying this
         SLL<T> subseq = new SLL<T>(this);
+        System.out.println("subseq= "+subseq);
         // find the item before here to reset to null
         // not necessary if here is the head
-        if (subseq.getHead() != here) {
+        System.out.println("subseq.getHead().getData()= "+subseq.getHead().getData());
+        System.out.println("here.getData()= "+here.getData());
+        if (subseq.getHead().getData() != here.getData()) {
+            System.out.println("subseqHead is NOT the same as here");
             NodeSL<T> current = subseq.head;
-            while (current.getNext() != here) {
+            System.out.println("current = "+current.getData());
+            int i = 0;
+            while (current.getNext().getData() != here.getData()) {
+                System.out.println("current.getNext= "+current.getNext().getData());
+                System.out.println("current.getNext() is not HERE. time = "+i);
                 current = current.getNext();
+                System.out.println("current = "+current.getData());
+                i += 1;
             }
             // found node before here
             // set here as head
