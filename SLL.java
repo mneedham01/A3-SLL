@@ -238,34 +238,30 @@ public class SLL<T> {
      * @param afterHere  marks the position in this where the new list should go
      */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
-        // if (list.equals(this)) {
-        //     throw new SelfInsertException();
-        // }
-        // // create copy of provided list
-        // SLL<T> copy = new SLL<T>(list);
-        // // if afterHere is null, add copy to the head of this
-        // if (afterHere.equals(null)){
-        //     copy.tail.setNext(this.head);
-        //     this.head = copy.head;
-        // } else {
-        //     // if afterHere is not null, find afterHere
-        //     // intialize at current
-        //     NodeSL<T> current = copy.getHead();
-        //     System.out.println("current = "+current.getData());
-        //     while (current.getData() != afterHere.getData()) {
-        //         current = current.getNext();
-        //         System.out.println("current = "+current.getData());
-        //     }
-        //     // found afterHere
-        //     System.out.println("Found afterHere. current = "+current.getData()+ ", afterHere = "+afterHere.getData());
-
-
+        if (list.equals(this)) {
+            throw new SelfInsertException();
         }
-
-        // connect end of list to the beginning of second part of this
-        copy.getTail().setNext(afterHere.getNext());
-        // connect afterHere to the beginning of the list
-        afterHere.setNext(list.getHead());
+        if (list.isEmpty()) {
+            return;
+        }
+        SLL<T> copy = new SLL<T>(list);
+        if (afterHere == null) {
+            // if afterHere is null, add list to start of this
+            copy.getTail().setNext(this.head);
+            this.head = copy.getHead();
+            return;
+        }
+        boolean afterHereIsTail = afterHere == this.tail;
+        if (afterHereIsTail) {
+            afterHere.setNext(copy.getHead());
+            this.tail = copy.tail;
+            return;
+        } else {
+            NodeSL<T> afterAfterHere = afterHere.getNext();
+            afterHere.setNext(copy.getHead());
+            System.out.println("afterAfterHere = " + afterAfterHere.getData());
+            copy.tail.setNext(afterAfterHere);
+        }
     }
 
     /*
@@ -275,6 +271,7 @@ public class SLL<T> {
      * @return  the new list
      */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
+        System.out.println("in subseq");
         SLL<T> subseq = new SLL<T>();
         // add first node
         subseq.addFirst(afterHere.getNext().getData());
