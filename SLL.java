@@ -238,17 +238,28 @@ public class SLL<T> {
      * @param afterHere  marks the position in this where the new list should go
      */
     public void spliceByCopy(SLL<T> list, NodeSL<T> afterHere){
-        if (list.equals(this)) {
-            throw new SelfInsertException();
-        }
-        // create copy of provided list
-        SLL<T> copy = new SLL<T>(list);
-        // if afterHere is null, add copy to the head of this
-        if (afterHere.equals(null)){
-            copy.tail.setNext(this.head);
-            this.head = copy.head;
-        } else {
-            // if afterHere is not null, find afterHere
+        // if (list.equals(this)) {
+        //     throw new SelfInsertException();
+        // }
+        // // create copy of provided list
+        // SLL<T> copy = new SLL<T>(list);
+        // // if afterHere is null, add copy to the head of this
+        // if (afterHere.equals(null)){
+        //     copy.tail.setNext(this.head);
+        //     this.head = copy.head;
+        // } else {
+        //     // if afterHere is not null, find afterHere
+        //     // intialize at current
+        //     NodeSL<T> current = copy.getHead();
+        //     System.out.println("current = "+current.getData());
+        //     while (current.getData() != afterHere.getData()) {
+        //         current = current.getNext();
+        //         System.out.println("current = "+current.getData());
+        //     }
+        //     // found afterHere
+        //     System.out.println("Found afterHere. current = "+current.getData()+ ", afterHere = "+afterHere.getData());
+
+
         }
 
         // connect end of list to the beginning of second part of this
