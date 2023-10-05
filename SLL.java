@@ -271,7 +271,6 @@ public class SLL<T> {
      * @return  the new list
      */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
-        System.out.println("in subseq");
         SLL<T> subseq = new SLL<T>();
         // // add first node
         // subseq.addFirst(afterHere.getNext().getData());
@@ -290,6 +289,16 @@ public class SLL<T> {
         // // rewrite connection afterHere
         // afterHere.setNext(toHere.getNext());
         // System.out.println(subseq);
+        // add to head of subseq
+        subseq.addFirst(afterHere.getNext().getData());
+        NodeSL<T> prevAdded = afterHere.getNext();
+        // add other items until and including toHere
+        while (prevAdded.getData() != toHere.getData()) {
+            subseq.addLast(prevAdded.getNext().getData());
+            prevAdded = prevAdded.getNext();
+        }
+        // update connection for this
+        afterHere.setNext(toHere.getNext());
         return subseq;
     }
 
