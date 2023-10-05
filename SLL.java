@@ -273,16 +273,23 @@ public class SLL<T> {
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
         System.out.println("in subseq");
         SLL<T> subseq = new SLL<T>();
-        // add first node
-        subseq.addFirst(afterHere.getNext().getData());
-        NodeSL<T> current = afterHere.getNext();
-        // loop through subseq, add to new list
-        while (current != toHere) {
-            subseq.addAfter(current, current.getNext().getData());
-            current = current.getNext();
-        }
-        // rewrite connection afterHere
-        afterHere.setNext(toHere.getNext());
+        // // add first node
+        // subseq.addFirst(afterHere.getNext().getData());
+        // System.out.println(subseq);
+        // NodeSL<T> current = afterHere.getNext();
+        // System.out.println("current = " + current.getData());
+        // // loop through subseq, add to new list
+        // System.out.println("while current != " + toHere.getData());
+        // while (current.getData() != toHere.getNext().getData()) {
+        //     System.out.println("In while loop. current = " + current.getData());
+        //     subseq.addAfter(current, current.getNext().getData());
+        //     System.out.println("subseq = " + subseq);
+        //     current = current.getNext();
+        //     System.out.println("current = " + current.getData());
+        // }
+        // // rewrite connection afterHere
+        // afterHere.setNext(toHere.getNext());
+        // System.out.println(subseq);
         return subseq;
     }
 
