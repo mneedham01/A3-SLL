@@ -56,7 +56,7 @@ public class TestMethods {
     public static void phase3tests(SLLTest t) {
         // phase 3 tests
         System.out.println("\nSLL Phase 3 tests:");
-        //t.test_copy_constructor();
+        t.test_copy_constructor();
         t.test_subseqByCopy();
         t.test_spliceByCopy();
         t.test_subseqByTransfer();

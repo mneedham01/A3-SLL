@@ -207,20 +207,28 @@ public class SLL<T> {
         if (this.size() < n) {
             throw new RuntimeException();
         }
-        // start a new SLL
-        SLL<T> subseq = new SLL<T>();
-        // add here to the head
-        subseq.addFirst(here.getData());
-        // initalize prevAdded
-        NodeSL<T> prevAdded = here;
-        // initalize counter
-        int counter = 1;
-        while (counter < n) {
-            NodeSL<T> current = prevAdded.getNext();
-            subseq.addAfter(prevAdded, current.getData());
-            prevAdded = current;
-            counter += 1;
+        // start a new SLL copying this
+        SLL<T> subseq = new SLL<T>(this);
+        // find the item before here to reset to null
+        // not necessary if here is the head
+        if (subseq.getHead() != here) {
+            NodeSL<T> current = subseq.head;
+            while (current.getNext() != here) {
+                current = current.getNext();
+            }
+            // found node before here
+            // set here as head
+            subseq.head = current.getNext();
+            // modify current's next
+            current.setNext(null);
         }
+        NodeSL<T> lastNode = subseq.getHead();
+        // find the last node
+        for (int i = 0; i < n - 1; i++) {
+            lastNode = lastNode.getNext();
+        }
+        subseq.tail = lastNode;
+        lastNode.setNext(null);
         return subseq;
     }
 
