@@ -259,7 +259,6 @@ public class SLL<T> {
         } else {
             NodeSL<T> afterAfterHere = afterHere.getNext();
             afterHere.setNext(copy.getHead());
-            System.out.println("afterAfterHere = " + afterAfterHere.getData());
             copy.tail.setNext(afterAfterHere);
         }
     }
@@ -272,33 +271,29 @@ public class SLL<T> {
      */
     public SLL<T> subseqByTransfer(NodeSL<T> afterHere, NodeSL<T> toHere){
         SLL<T> subseq = new SLL<T>();
-        // // add first node
-        // subseq.addFirst(afterHere.getNext().getData());
-        // System.out.println(subseq);
-        // NodeSL<T> current = afterHere.getNext();
-        // System.out.println("current = " + current.getData());
-        // // loop through subseq, add to new list
-        // System.out.println("while current != " + toHere.getData());
-        // while (current.getData() != toHere.getNext().getData()) {
-        //     System.out.println("In while loop. current = " + current.getData());
-        //     subseq.addAfter(current, current.getNext().getData());
-        //     System.out.println("subseq = " + subseq);
-        //     current = current.getNext();
-        //     System.out.println("current = " + current.getData());
-        // }
-        // // rewrite connection afterHere
-        // afterHere.setNext(toHere.getNext());
-        // System.out.println(subseq);
-        // add to head of subseq
-        subseq.addFirst(afterHere.getNext().getData());
-        NodeSL<T> prevAdded = afterHere.getNext();
+        NodeSL<T> prevAdded;
+        // if afterHere is null, add to front of list
+        // if not, add node after afterHere to front of list
+        if (afterHere == null) {
+            subseq.addFirst(this.getHead().getData());
+            prevAdded = this.getHead();
+        } else {
+            subseq.addFirst(afterHere.getNext().getData());
+            prevAdded = afterHere.getNext();
+        }
         // add other items until and including toHere
         while (prevAdded.getData() != toHere.getData()) {
             subseq.addLast(prevAdded.getNext().getData());
             prevAdded = prevAdded.getNext();
         }
         // update connection for this
-        afterHere.setNext(toHere.getNext());
+        if (afterHere == null) {
+            this.head = prevAdded.getNext();
+        } else {
+            afterHere.setNext(toHere.getData() == this.getTail().getData()
+            ? toHere.getNext()
+            : toHere.getNext());
+        }
         return subseq;
     }
 
